@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Pets {% endblock %}
+
+{% block content %} 
+
+<div class="container">
+    <h1>Our Pets</h1>
+    <div class="row">
+        {% for pet in pets %}
+            <div class="col-4 mt-5">
+                <a href="{{ pet.id }}">
+                    <img src="{{ pet.photo_url }}" class="img-thumbnail">
+                </a>
+                <span class="text-primary">{{ pet.name }}</span><strong> is 
+                    {% if pet.available %} 
+                        available!
+                    {% else %}
+                        not available
+                    {% endif %}
+                </strong>
+            </div>
+        {% endfor %}
+        <div class="container mt-5">
+            <form action="/add" method="POST">
+                <a href="/add" class="btn btn-primary">Add a pet</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <h1>Random Petfinder Pet</h1>
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ pet_finder_pet['photo_url'] }}" class="img-thumbnail">
+                <p>{{ pet_finder_pet['name'] }} the {{ pet_finder_pet['species'] }} who is {{ pet_finder_pet['age'] }}</p>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
